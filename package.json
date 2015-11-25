@@ -1,6 +1,6 @@
 {
   "name": "rtc-rpi",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "RTC driver for compute module",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,5 @@
     "url": "https://github.com/131/rpi-rtc/issues"
   },
   "homepage": "https://github.com/131/rpi-rtc",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
