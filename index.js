@@ -18,6 +18,22 @@ function bcd_to_int(x){
   return (result + high)
 }
 
+var setTimeSync = function(date) {
+  var bus  = i2c.openSync(1);
+
+  bus.writeByteSync(_ADRESS, 0x80, int_to_bcd(date.getSeconds()));
+  bus.writeByteSync(_ADRESS, 0x81, int_to_bcd(date.getMinutes()));
+  bus.writeByteSync(_ADRESS, 0x82, int_to_bcd(date.getHours()));
+  bus.writeByteSync(_ADRESS, 0x84, int_to_bcd(date.getDate()));
+  bus.writeByteSync(_ADRESS, 0x85, int_to_bcd(date.getMonth()+1));
+  bus.writeByteSync(_ADRESS, 0x87, int_to_bcd(0x20));
+  bus.writeByteSync(_ADRESS, 0x86, int_to_bcd(date.getFullYear()-2000));
+  bus.writeByteSync(_ADRESS, 0x88,1);
+
+  bus.closeSync();
+}
+
+
 var readTimeSync = function(){
   var bus  = i2c.openSync(1);
 
@@ -27,8 +43,11 @@ var readTimeSync = function(){
   var day     = bcd_to_int(bus.readByteSync(_ADRESS , 0x06));
   var month   = bcd_to_int(bus.readByteSync(_ADRESS , 0x08));
   var year    = bcd_to_int(bus.readByteSync(_ADRESS , 0x09)) + 2000;
+
+  bus.closeSync();
+
   return new Date(year, month - 1, day, hours, minutes, seconds, 0);
 }
 
 module.exports.readTimeSync = readTimeSync;
-
+module.exports.setTimeSync  = setTimeSync;

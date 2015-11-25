@@ -2,4 +2,13 @@
 
 var rtc = require('./');
 
-console.log(rtc.readTimeSync());
+
+
+rtc.setTimeSync(new Date()) ;
+
+
+setTimeout(function(){
+
+  console.log(rtc.readTimeSync());
+}, 2000);
+
