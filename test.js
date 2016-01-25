@@ -1,6 +1,6 @@
 "use strict";
 
-var rtc = new require('./');
+var rtc = require('./');
 
 
 
