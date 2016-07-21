@@ -32,14 +32,14 @@ var setTimeSync = function(date , adress , rtc_version) {
   
   var rtc_addr_param = require(rtc_file)
 
-  bus.writeByteSync(adress, rtc_addr_param.write.seconds , int_to_bcd(date.getSeconds()));
-  bus.writeByteSync(adress, rtc_addr_param.write.minutes , int_to_bcd(date.getMinutes()));
-  bus.writeByteSync(adress, rtc_addr_param.write.hours   , int_to_bcd(date.getHours()));
-  bus.writeByteSync(adress, rtc_addr_param.write.day     , int_to_bcd(date.getDate()));
-  bus.writeByteSync(adress, rtc_addr_param.write.month   , int_to_bcd(date.getMonth()+1));
-  bus.writeByteSync(adress, 0x87, int_to_bcd(0x20));
-  bus.writeByteSync(adress, rtc_addr_param.write.year    , int_to_bcd(date.getFullYear()-2000));
-  bus.writeByteSync(adress, 0x88,1);
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.seconds) , int_to_bcd(date.getSeconds()));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.minutes) , int_to_bcd(date.getMinutes()));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.hours)   , int_to_bcd(date.getHours()));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.day)     , int_to_bcd(date.getDate()));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.month)   , int_to_bcd(date.getMonth()+1));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.year2) , int_to_bcd(0x20));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.year)    , int_to_bcd(date.getFullYear()-2000));
+  bus.writeByteSync(adress, parseInt(rtc_addr_param.write.end),1);
 
   bus.closeSync();
 }
@@ -55,12 +55,12 @@ var readTimeSync = function(adress , rtc_version){
     
   var bus  = i2c.openSync(1);
 
-  var seconds = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.seconds));
-  var minutes = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.minutes));
-  var hours   = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.hours));
-  var day     = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.day));
-  var month   = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.month));
-  var year    = bcd_to_int(bus.readByteSync(adress , rtc_addr_param.read.year)) + 2000;
+  var seconds = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.seconds)));
+  var minutes = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.minutes)));
+  var hours   = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.hours)));
+  var day     = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.day)));
+  var month   = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.month)));
+  var year    = bcd_to_int(bus.readByteSync(adress , parseInt(rtc_addr_param.read.year))) + 2000;
 
   bus.closeSync();
 

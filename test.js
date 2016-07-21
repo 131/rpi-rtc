@@ -4,11 +4,11 @@ var rtc = require('./');
 
 
 
-rtc.setTimeSync(new Date() , 0x30 , "DS1307") ;
+rtc.setTimeSync(new Date() , 0x68 , "DS3231") ;
 
 
 setTimeout(function(){
 
-  console.log(rtc.readTimeSync(0x30 , "DS1307"));
+  console.log(rtc.readTimeSync(0x68 , "DS3231"));
 }, 2000);
 
