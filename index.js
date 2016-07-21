@@ -3,8 +3,8 @@
 var i2c = require('i2c-bus');
 
 const supportedRtcVersion = {
-  "DS1307" : "./DS1307.JSON",
-  "DS3231" : "./DS3231.JSON"
+  "DS1307" : "./DS1307.json",
+  "DS3231" : "./DS3231.json"
 }
 
 function int_to_bcd(x){
@@ -52,6 +52,8 @@ var readTimeSync = function(adress , rtc_version){
   var rtc_file = supportedRtcVersion[rtc_version]
   if(!rtc_file)
     throw "must give rtc_version version";
+    
+  var rtc_addr_param = require(rtc_file);
     
   var bus  = i2c.openSync(1);
 
