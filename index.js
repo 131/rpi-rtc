@@ -26,11 +26,10 @@ var setTimeSync = function(date , adress , rtc_version) {
     throw "must give I2C address of the clock"
   var bus  = i2c.openSync(1);
   
-  var rtc_file = supportedRtcVersion[rtc_version]
-  if(!rtc_file)
+  var rtc_addr_param = supportedRtcVersion[rtc_version]
+  if(!rtc_addr_param)
     throw "must give rtc_version version";
   
-  var rtc_addr_param = rtc_file)
 
   bus.writeByteSync(adress, parseInt(rtc_addr_param.write.seconds) , int_to_bcd(date.getSeconds()));
   bus.writeByteSync(adress, parseInt(rtc_addr_param.write.minutes) , int_to_bcd(date.getMinutes()));
