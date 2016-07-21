@@ -1,0 +1,18 @@
+{
+  "read" : {
+    "seconds" : "0x00" , 
+    "minutes" : "0x01" ,
+    "hours"   : "0x02" ,
+    "day"     : "0x04" , 
+    "month"   : "0x05" ,
+    "year"    : "0x06"
+  },
+  "write" : {
+    "seconds" : "0x00" ,
+    "minutes" : "0x01" ,
+    "hours"   : "0x02" ,
+    "day"     : "0x04" ,
+    "month"   : "0x05" , 
+    "year"    : "0x06"
+  }
+}
